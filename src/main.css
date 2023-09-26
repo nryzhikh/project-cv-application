@@ -13,6 +13,7 @@ form {
     width: 320px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); /* A subtle shadow to give a slightly raised look */
     margin: 0 auto;
+    margin-top: 20px;
   }
   
   input {
@@ -26,13 +27,22 @@ form {
     font-size: 16px;
   }
   
-  input[type="submit"] {
+  input[type="submit"], button {
     border: 2px outset #999; /* 3D outset look */
     padding: 5px 10px;
     background-color: #e6e4e4; /* Light gray */
     cursor: pointer;
-    margin-right: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
   }
+
+    input[type="submit"]:hover , button:hover { /* When the submit button is hovered or focused */
+        background-color: #d6d4d4; /* A little darker gray */
+    }
+    
   
   button:active { /* Gives a "pressed" look when clicked */
     border-style: inset;

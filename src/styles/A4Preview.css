@@ -1,0 +1,15 @@
+.a4-container {
+    width: 210mm;
+    max-width: 210mm;
+    height: 297mm;
+    margin: 30px auto;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: auto; /* In case content exceeds A4 size */
+    box-sizing: border-box;
+    padding: 20mm; /* You can adjust padding as needed */
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); /* A subtle shadow to give a slightly raised look */
+
+}
+

@@ -1,0 +1,29 @@
+.print-preview {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    border: 1px solid black;
+    margin: 20px auto;
+    padding: 20mm; /* Optional */
+    box-sizing: border-box;
+    background-color: white;
+    /* ... any other styles you want for the preview */
+}
+
+/* Print-specific styles */
+@media print {
+    body * {
+        visibility: hidden; /* Hide all elements by default */
+    }
+
+    .print-preview, .print-preview * {
+        visibility: visible; /* Show only the preview and its contents */
+    }
+
+    .print-preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
