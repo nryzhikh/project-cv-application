@@ -1,20 +1,26 @@
-import { useState } from "react";
 
-export default function GeneralInformation() {
-    const [name, setName] = useState("John Doe");
-    const [age, setAge] = useState(18);
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+import PropTypes from 'prop-types';
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        alert(`Submitting Name ${name} ${age} ${email} ${phone}`)
-    }
+
+function GeneralInformation({genInfo, updateField, goToForm}) {
+   
 
     const handleInputChange = (event) => {
         // Remove any characters that are not numbers, +, -, ., (, ), or space
         event.target.value = event.target.value.replace(/[^\d+-.()\s]/g, '');
     };
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      updateField(name, value);
+  };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      goToForm(2);
+    }
+
+
 
     return (
        <form onSubmit={handleSubmit}>
@@ -22,9 +28,11 @@ export default function GeneralInformation() {
               <label>
                 Name:
                 <input
+                className='active'
                  type="text"
-                 value={name}
-                 onChange={e => setName(e.target.value)}
+                 name="name"
+                 value={genInfo.name}
+                 onChange={handleChange}
                 />
               </label>
               <label>
@@ -32,17 +40,19 @@ export default function GeneralInformation() {
                 <input
                  type="number"
                  required
-                 value={age}
-                 onChange={e => setAge(e.target.value)}
+                 name="age"
+                 value={genInfo.age}
+                 onChange={handleChange}
                 />
               </label>
               <label>
                 Email:
                 <input
                  type="email"
+                 name="email"
                  pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" title="Invalid email format" required
-                 value={email}
-                 onChange={e => setEmail(e.target.value)}
+                 value={genInfo.email}
+                 onChange={handleChange}
                 />
               </label>
               <label>
@@ -54,11 +64,19 @@ export default function GeneralInformation() {
                  title="Invalid phone number format" 
                  required
                  onInput={handleInputChange}
-                 onChange={e => setPhone(e.target.value)}
+                 value={genInfo.phone}
+                 onChange={handleChange}
                 />
               </label>
                 <input type="submit" value="Submit" />
-                <button type="button">Edit</button>
             </form>
     );
 }
+
+GeneralInformation.propTypes = {
+    genInfo: PropTypes.object.isRequired,
+    updateField: PropTypes.func.isRequired,
+    goToForm: PropTypes.func.isRequired,
+};
+
+export default GeneralInformation;

@@ -1,61 +1,57 @@
-import { useState } from "react";
+import ExperienceSection from './experience-section';
+import PropTypes from 'prop-types';
 
-export default function Experience() {
-    const [company, setCompany] = useState("");
-    const [position, setPosition] = useState("");
-    const [tasks, setTasks] = useState("");
-    const [start, setStart] = useState("");
-    const [end, setEnd] = useState("");
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        alert(`Submitting Name ${company} ${position} ${tasks} ${start} ${end}`)
+function Experience ({experiences, updateField, goToForm, addSection, removeSection}) {
+
+    const handleChange = (e) => {
+      const { id, name, value } = e.target;
+      updateField(id, name, value);
+  };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      goToForm(4);
+    }
+
+    const handleAddExperience = (e) => {
+        e.preventDefault();
+        addSection();
     }
 
     return (
        <form onSubmit={handleSubmit}>
+        <h2>1. General Information</h2>
+        <button type="button" onClick={() => goToForm(1)}>Edit</button>
+        <h2>2. Education</h2>
+        <button type="button" onClick={() => goToForm(2)}>Edit</button>
         <h2>3. Experience</h2>
-              <label>
-                Company:
-                <input
-                 type="text"
-                 value={company}
-                 onChange={e => setCompany(e.target.value)}
-                />
-              </label>
-              <label>
-                Position:
-                <input
-                 type="text"
-                 value={position}
-                 onChange={e => setPosition(e.target.value)}
-                />
-              </label>
-              <label>
-                Tasks:
-                <input
-                 type="text"
-                 value={tasks}
-                 onChange={e => setTasks(e.target.value)}
-                />
-              </label>
-              <label>
-                Start Date:
-                <input
-                 type="date"
-                 value={start}
-                 onChange={e => setStart(e.target.value)}
-                />
-              </label>
-              <label>
-                End Date:
-                <input
-                 type="date"
-                 value={end}
-                 onChange={e => setEnd(e.target.value)}
-                />
-              </label>
-                <input type="submit" value="Submit" />
-       </form>
+        <button type="button" onClick={handleAddExperience}>Add</button>
+        {experiences.map((experienceData, index) => (
+        <>
+        <ExperienceSection  sectionData={experienceData} onChange={handleChange} key={index} id={index}/>
+        <button type="button" onClick={() => removeSection(index)}>Remove</button>
+        </>
+        ))}
+        <button onClick={handleSubmit}>Submit</button>
+        </form>
     );
 }
+
+Experience.propTypes = {
+    experiences: PropTypes.array.isRequired,
+    updateField: PropTypes.func.isRequired,
+    goToForm: PropTypes.func.isRequired,
+    addSection: PropTypes.func.isRequired,
+    removeSection: PropTypes.func.isRequired,
+    renderA4Page: PropTypes.func.isRequired,
+  };
+
+export default Experience;
+
+
+
+
+
+
+

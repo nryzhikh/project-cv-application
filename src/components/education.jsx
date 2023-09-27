@@ -1,65 +1,48 @@
-import { useState } from "react";
+import EducationSection from './education-section';
+import PropTypes from 'prop-types';
 
-export default function Education() {
-    const [school, setSchool] = useState("");
-    const [degree, setDegree] = useState("");
-    const [field, setField] = useState("");
-    const [graduation, setGraduation] = useState("");
-    const [gpa, setGpa] = useState("");
+function Education ({education, updateField, goToForm, addSection, removeSection}) {
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        alert(`Submitting Name ${school} ${degree} ${field} ${graduation} ${gpa}`)
+   
+    const handleChange = (e) => {
+        const { id, name, value } = e.target;
+        updateField(id, name, value);
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      goToForm(3);
+    }
+
+    const handleAddEducation = (e) => {
+        e.preventDefault();
+        addSection();
+        console.log(education);
     }
 
     return (
        <form onSubmit={handleSubmit}>
+        <h2>1. General Information</h2>
+        <button type="button" onClick={() => goToForm(1)}>Edit</button>
         <h2>2. Education</h2>
-              <label>
-                School:
-                <input
-                 type="text"
-                 value={school}
-                 onChange={e => setSchool(e.target.value)}
-                />
-              </label>
-              <label>
-                Degree:
-                <input
-                 type="text"
-                 value={degree}
-                 onChange={e => setDegree(e.target.value)}
-                />
-              </label>
-              <label>
-                Field of Study:
-                <input
-                 type="text"
-                 value={field}
-                 onChange={e => setField(e.target.value)}
-                />
-              </label>
-              <label>
-                Graduation Date:
-                <input
-                 type="date"
-                 value={graduation}
-                 onChange={e => setGraduation(e.target.value)}
-                />
-              </label>
-              <label>
-                GPA:
-                <input
-                 type="number"
-                 step="0.01"
-                 min="0"
-                 max="4"
-                 value={gpa}
-                 onChange={e => setGpa(e.target.value)}
-                />
-              </label>
-                <input type="submit" value="Submit" />
-                <button type="button">Edit</button>
-       </form>
+        <button type="button" onClick={handleAddEducation}>Add</button>
+        {education.map((educationData, index) => (
+        <>
+        <EducationSection  eduSectionData={educationData} onChange={handleChange} key={index} id={index}/>
+        <button type="button" onClick={() => removeSection(index)}>Remove</button>
+        </>
+        ))}
+        <button type="submit" value="Submit">Next</button>
+        </form>
     );
 }
+
+Education.propTypes = {
+    education: PropTypes.array.isRequired,
+    updateField: PropTypes.func.isRequired,
+    goToForm: PropTypes.func.isRequired,
+    addSection: PropTypes.func.isRequired,
+    removeSection: PropTypes.func.isRequired,
+  };
+
+export default Education;

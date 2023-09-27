@@ -13,3 +13,20 @@
 
 }
 
+@media print {
+    body * {
+        visibility: hidden; /* Hide all elements by default */
+    }
+
+    .a4-container, .a4-container * {
+        visibility: visible; /* Show only the preview and its contents */
+    }
+
+    .a4-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
