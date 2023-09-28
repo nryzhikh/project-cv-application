@@ -138,11 +138,10 @@ export default function App() {
                 <button type="button" onClick={() => removeExperience(index)}>Remove</button>
                 </>
                 ))}
-                <button onClick={() => goToForm(4)}>Submit</button>
+                <button onClick={() => goToForm(4)}>Next</button>
               </form>;
             case 4:
-                return <Print
-                goToForm={goToForm}
+                return <Print goToForm={goToForm}
                 />;
             default:
               return <div>Invalid form step</div>;

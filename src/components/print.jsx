@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 
 function Print ({ goToForm }) {
 
-    function handlePrint() {
+    function handlePrint(e) {
+        e.preventDefault();
         window.print();
     }
 

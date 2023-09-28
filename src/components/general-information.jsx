@@ -15,15 +15,9 @@ function GeneralInformation({genInfo, updateField, goToForm}) {
       updateField(name, value);
   };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      goToForm(2);
-    }
-
-
 
     return (
-       <form onSubmit={handleSubmit}>
+       <form>
         <h2>1. General Information</h2>
               <label>
                 Name:
@@ -68,7 +62,7 @@ function GeneralInformation({genInfo, updateField, goToForm}) {
                  onChange={handleChange}
                 />
               </label>
-                <input type="submit" value="Submit" />
+              <button onClick={() => goToForm(2)}>Next</button>
             </form>
     );
 }
