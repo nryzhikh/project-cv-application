@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function ExperienceSection({sectionData, id, onChange}) {
+function ExperienceSection({ExpSectionData, id, onChange}) {
     
     return (
         <div key={id} id={id}>
@@ -11,7 +11,7 @@ function ExperienceSection({sectionData, id, onChange}) {
             id={id}
              type="text"
              name="company"
-             value={sectionData.company}
+             value={ExpSectionData.company}
              onChange={onChange}
              required
             />
@@ -22,7 +22,7 @@ function ExperienceSection({sectionData, id, onChange}) {
             id={id}
              type="text"
              name="position"
-             value={sectionData.position}
+             value={ExpSectionData.position}
              onChange={onChange}
              required
             />
@@ -33,7 +33,7 @@ function ExperienceSection({sectionData, id, onChange}) {
             id={id}
              type="textarea"
              name="tasks"
-             value={sectionData.tasks}
+             value={ExpSectionData.tasks}
              onChange={onChange}
              required
             />
@@ -44,7 +44,7 @@ function ExperienceSection({sectionData, id, onChange}) {
             id={id}
              type="date"
              name="start"
-             value={sectionData.start}
+             value={ExpSectionData.start}
              onChange={onChange}
              required
             />
@@ -55,7 +55,7 @@ function ExperienceSection({sectionData, id, onChange}) {
             id={id}
              type="date"
              name="end"
-             value={sectionData.end}
+             value={ExpSectionData.end}
              onChange={onChange}
              required
             />
@@ -65,9 +65,9 @@ function ExperienceSection({sectionData, id, onChange}) {
 }
 
 ExperienceSection.propTypes = {
-    sectionData: PropTypes.object.isRequired,
+    ExpSectionData: PropTypes.object.isRequired,
     id: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default ExperienceSection;

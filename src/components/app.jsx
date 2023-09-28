@@ -1,9 +1,9 @@
 import GeneralInformation from "./general-information";
-import Education from "./education";
-import Experience from "./experience";
+import ExperienceSection from "./experience-section";
 import A4Preview from "./A4Preview";
 import { useState } from "react";
 import Print from "./print";
+import EducationSection from "./education-section";
 
 export default function App() {
     
@@ -83,7 +83,20 @@ export default function App() {
 
     const goToForm = (formNumber) => {
         setCurrentForm(formNumber);
+        console.log(currentForm)
     };
+
+    const handleChangeEducation = (e) => {
+        const { id, name, value } = e.target;
+        updateEducation(id, name, value);
+    };
+
+    const handleChangeExperience = (e) => {
+        const { id, name, value } = e.target;
+        updateExperience(id, name, value);
+    };
+
+
     
     return (
         <>
@@ -97,21 +110,36 @@ export default function App() {
                 goToForm={goToForm}
              />;
             case 2:
-              return <Education
-                updateField={updateEducation}
-                goToForm={goToForm}
-                education={education}
-                addSection={addEducation}
-                removeSection={removeEducation}
-              />;
+            return <form>
+                <h2>1. General Information</h2>
+                <button type="button" onClick={() => goToForm(1)}>Edit</button>
+                <h2>2. Education</h2>
+                <button type="button" onClick={addEducation}>Add</button>
+                {education.map((educationData, index) => (
+                <>
+                <EducationSection  eduSectionData={educationData} onChange={handleChangeEducation} key={index} id={index}/>
+                <button type="button" onClick={() => removeEducation(index)}>Remove</button>
+                </>
+                ))}
+                <button type="button" onClick={() => goToForm(3)}>Next</button>
+              </form>
             case 3:
-              return <Experience
-                updateField={updateExperience}
-                goToForm={goToForm}
-                experiences={experiences}
-                addSection={addExperience}
-                removeSection={removeExperience}
-            />;
+              return  <form>
+                <h2>1. General Information</h2>
+                <button type="button" onClick={() => goToForm(1)}>Edit</button>
+                <h2>2. Education</h2>
+                <button type="button" onClick={() => goToForm(2)}>Edit</button>
+                <h2>3. Experience</h2>
+                <button type="button" onClick={addExperience}>Add</button>
+                {experiences.map((experienceData, index) => (
+                    console.log(experienceData),
+                <>
+                <ExperienceSection  ExpSectionData={experienceData} onChange={handleChangeExperience} key={index} id={index}/>
+                <button type="button" onClick={() => removeExperience(index)}>Remove</button>
+                </>
+                ))}
+                <button onClick={() => goToForm(4)}>Submit</button>
+              </form>;
             case 4:
                 return <Print
                 goToForm={goToForm}
